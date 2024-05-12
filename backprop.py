@@ -30,11 +30,16 @@ class Layer(ABC):
 
 class Sigmoid(Layer):
     def forward(self, input: npt.NDArray[np.float32]) -> npt.NDArray[np.float32]:
+        # sigmoid(x) = 1 / (1 + exp(-x))
+        # sigmoid(0) = 0.5
+        # sigmoid(-inf) = 0
+        # sigmoid(+inf) = 1
         self.input = input
         self.output = 1 / (1 + np.exp(-input))
         return self.output
 
     def backward(self, output_gradient: npt.NDArray[np.float32]) -> npt.NDArray[np.float32]:
+        # d(sigmoid(x))/dx = d/dx(1 / (1 + exp(-x))) = exp(-x) / (1 + exp(-x))^2 = sigmoid(x) * (1 - sigmoid(x))
         sigmoid_derivative = self.output * (1 - self.output)
         return output_gradient * sigmoid_derivative
     
@@ -54,10 +59,15 @@ class ReLU(Layer):
     
 class Tanh(Layer):
     def forward(self, input: npt.NDArray[np.float32]) -> npt.NDArray[np.float32]:
+        # tanh(x) = (exp(x) - exp(-x)) / (exp(x) + exp(-x))
+        # tanh(0) = 0
+        # tanh(-inf) = -1
+        # tanh(+inf) = 1
         self.input = input
         return np.tanh(input)
     
     def backward(self, output_gradient: npt.NDArray[np.float32]) -> npt.NDArray[np.float32]:
+        # d(tanh(x))/dx = d/dx((exp(x) - exp(-x)) / (exp(x) + exp(-x))) = 1 - tanh(x)^2
         return output_gradient * (1 - np.tanh(self.input) ** 2)
     
     def clone(self) -> "Layer":
