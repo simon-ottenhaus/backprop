@@ -2,14 +2,24 @@
 
 # Repository Overview
 
-This repository contains Python code to help understand basic concepts of deep learning through practical examples. It focuses on building simple neural networks from scratch using NumPy, a popular library for mathematical operations in Python.
+This repository contains Python code to help understand basic concepts of deep learning through practical examples. It focuses on building simple neural networks from scratch using NumPy.
 
 ## Features
 - **Neural Network Basics**: Learn how neural networks work by building and training them to solve problems like the XOR classification.
-- **Customizable Components**: Includes various components like activation functions (e.g., Sigmoid, ReLU) and loss functions (e.g., Mean Squared Error).
+- **Customizable Components**: Includes various components like activation functions (e.g., Sigmoid, ReLU) and loss functions (Mean Squared Error and Cross Entropy).
 - **Data Scaling Analysis**: Explore how increasing training data affects model performance with scripts that plot error rates.
+- **Visualizations**: Visualize the activations and gradients, run `python train_minimal_xor.py`.
+- **Introspection**: Look at how the weights and biases change during training, run `python train_step.py`.
 
 ## How to Use
+
+Install the required dependencies using `pip`:
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
 Run scripts to train models and see how changes affect results. For example, to train a neural network on XOR problem:
 ```bash
 python train_xor.py
