@@ -135,12 +135,12 @@ class Dense(Layer):
     def initialize_deterministic_linear(self, input_size: int, output_size: int) -> tuple[npt.NDArray[np.float32], npt.NDArray[np.float32]]:
         weights = np.linspace(0, 1, num=input_size * output_size).reshape(input_size, output_size)
         biases = np.linspace(0, 1, num=output_size)
-        return weights, biases
+        return weights.astype(np.float32), biases.astype(np.float32)
     
     def initialize_normal(self, input_size: int, output_size: int) -> tuple[npt.NDArray[np.float32], npt.NDArray[np.float32]]:
         weights = np.random.randn(input_size, output_size) * 0.1
-        biases = np.zeros_like(output_size)
-        return weights, biases
+        biases = np.zeros((output_size))
+        return weights.astype(np.float32), biases.astype(np.float32)
 
 
 class WeightLayer(Layer):
