@@ -29,14 +29,15 @@ class MeanSquaredErrorLoss(Loss):
     
 
 class CrossEntropyLoss(Loss):
+    EPS = 1e-6
+
     def forward(self, y_pred: npt.NDArray[np.float32], y_true: npt.NDArray[np.float32]) -> np.float32:
         loss = self.forward_no_mean(y_pred, y_true)
         return np.mean(loss)
     
     def forward_no_mean(self, y_pred: npt.NDArray[np.float32], y_true: npt.NDArray[np.float32]) -> npt.NDArray[np.float32]:
         # Clipping prediction values to avoid log(0) scenario
-        eps = 1e-15
-        y_pred = np.clip(y_pred, eps, 1 - eps)
+        y_pred = np.clip(y_pred, self.EPS, 1 - self.EPS)
         self.y_pred = y_pred
         self.y_true = y_true
         # Calculate the negative log likelihood
@@ -45,7 +46,6 @@ class CrossEntropyLoss(Loss):
 
     def backward(self) -> npt.NDArray[np.float32]:
         # Calculating the gradient
-        eps = 1e-15
-        self.y_pred = np.clip(self.y_pred, eps, 1 - eps)
+        self.y_pred = np.clip(self.y_pred, self.EPS, 1 - self.EPS)
         grad = (self.y_pred - self.y_true) / (self.y_pred * (1 - self.y_pred)) / len(self.y_true)
         return grad
