@@ -1,7 +1,5 @@
 # `backprop` Repository Overview
 
-# Repository Overview
-
 This repository contains Python code to help understand basic concepts of deep learning through practical examples. It focuses on building simple neural networks from scratch using NumPy.
 
 ## Features
