@@ -22,9 +22,11 @@ python train_xor_data_scaling.py
 
 ## Data Scaling Analysis
 
-Using the tools provided in this repo you can reproduce (data) scaling laws for neural networks. One prominent example is the [GPT-3 paper](https://arxiv.org/abs/2005.14165) where the validation loss scales with compute and model size.
+Using the tools provided in this repo you can reproduce (data) scaling laws for neural networks. One prominent example is the [GPT-3 paper](https://arxiv.org/abs/2005.14165) where the validation loss scales with compute and model size. 
 
-On a much scaller scale, you can reproduce data scaling. `train_xor_data_scaling.py` trains a series of neural networks on the XOR problem with increasing amounts of training data (from 10 to 1000 samples). Each training is repeated 10 times.
+You can also find this relationship in speech recognition. There the WER per unique word scales with the word frequency in the training data.
+
+On a much scaller scale, you can also reproduce this data scaling effect. `train_xor_data_scaling.py` trains a series of neural networks on the XOR problem with increasing amounts of training data (from 10 to 1000 samples). Each training is repeated 10 times.
 
 ![Data Scaling Analysis](xor_data_scaling.png)
 
